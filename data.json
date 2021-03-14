@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    {
+      "name": "wartek.guru.example.v1.Examples",
+      "mappings": {
+        "createExample": [
+          { "request": { "name": "ok" }, "response": { "message": "nok" } },
+          { "request": { "name": "haha" }, "response": { "message": "hihi" } }
+        ]
+      }
+    }
+  ]
+}

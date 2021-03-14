@@ -1,6 +1,9 @@
+// const fs = require('fs');
+// const path = require('path');
 const grpc = require('@grpc/grpc-js');
 const get = require('lodash.get');
 const isEqual = require('lodash.isequal');
+const GrpcError = require('grpc-errors');
 
 const load = require('./load');
 
@@ -24,18 +27,15 @@ function create(services, fileDescriptorSet) {
         if (!mapped) {
           continue;
         }
-
-        binding.implementations[method.originalName] = function (call, cb) {
+        binding.implementations[method.originalName] = async function (call) {
           // TODO(dio-wartek): Create a map for error.
           for (const entry of mapped) {
             if (isEqual(call.request, entry.request)) {
-              return cb(null, entry.response);
+              return entry.response;
             }
           }
-          return cb(null, {
-            code: grpc.status.INVALID_ARGUMENT,
-            message: 'no mapped data'
-          });
+
+          throw new GrpcError.InvalidArgumentError('no mmapped response');
         }
       }
     }

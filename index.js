@@ -15,7 +15,7 @@ module.exports = class GrpcServer {
     const packageDefinition = load(fileDescriptorSet);
     for (const binding of bindings) {
       const serviceDefinition = get(packageDefinition, binding.service);
-      this.server.addService(serviceDefinition.service, binding.implementations);
+      this.server.addService(serviceDefinition.service, wrap(binding.implementations));
     }
     return this;
   }
@@ -27,4 +27,21 @@ module.exports = class GrpcServer {
     });
     return this;
   }
+}
+
+function wrap(implementations) {
+  const wrapped = {};
+  for (const name in implementations) {
+    if (typeof implementations[name] !== 'function') {
+      continue;
+    }
+    wrapped[name] = function (call, cb) {
+      implementations[name](call)
+        .then(function (returned) {
+          cb(null, returned);
+        })
+        .catch(cb);
+    }
+  }
+  return wrapped;
 }

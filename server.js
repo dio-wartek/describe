@@ -1,19 +1,12 @@
-const { create } = require('./bindings');
+const path = require('path');
+const fromData = require('./bindings');
 const GrpcServer = require('./');
+const data = require('./data.json');
 
 const server = new GrpcServer();
 
-const bindings = create([
-  {
-    name: 'wartek.guru.example.v1.Examples',
-    mappings: {
-      createExample: [
-        { request: { name: "ok" }, response: { message: "nok" } },
-        { request: { name: "haha" }, response: { message: "hihi" } }
-      ]
-    }
-  },
-],
+const bindings = fromData.create(
+  data.bindings,
   'image.bin'
 );
 

@@ -1,0 +1,14 @@
+{
+  "name": "describe",
+  "version": "1.0.0",
+  "description": "Describe describes gRPC server",
+  "main": "index.js",
+  "author": "Dhi Aurrahman <dio@wartek.belajar.id>",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.2.11",
+    "@grpc/proto-loader": "^0.5.6",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0"
+  }
+}

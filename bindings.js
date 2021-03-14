@@ -1,5 +1,3 @@
-// const fs = require('fs');
-// const path = require('path');
 const grpc = require('@grpc/grpc-js');
 const get = require('lodash.get');
 const isEqual = require('lodash.isequal');

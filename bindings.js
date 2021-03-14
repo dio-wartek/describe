@@ -19,7 +19,7 @@ function create(services, fileDescriptorSet) {
     const serviceDefinition = get(packageDefinition, binding.service);
     if (serviceDefinition.service) {
       for (const key in serviceDefinition.service) {
-        const method = serviceDefinition.service[key]
+        const method = serviceDefinition.service[key];
         const mapped = service.mappings[method.originalName];
         if (!mapped) {
           continue;

@@ -4,13 +4,14 @@ const GrpcServer = require('./');
 const data = require('./data.json');
 
 const server = new GrpcServer();
+const fileDescriptorSet = path.join(__dirname, 'image.bin');
 
 const bindings = fromData.create(
   data.bindings,
-  'image.bin'
+  fileDescriptorSet
 );
 
 server.use({
-  fileDescriptorSet: 'image.bin',
+  fileDescriptorSet,
   bindings,
-}).start('0.0.0.0:50051', () => { });
+}).start('127.0.0.1:50051', () => { });

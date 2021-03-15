@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node --unhandled-rejections=strict /app/server
